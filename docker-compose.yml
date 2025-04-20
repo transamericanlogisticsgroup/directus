@@ -76,6 +76,22 @@
 version: '3.8'
 
 services:
+
+  directus:
+    build:
+      context: .               # assumes your compose lives at the root of your fork
+      dockerfile: Dockerfile   # your custom Dockerfile (can be the official one plus your-hooks)
+    # (optionally tag it so you can refer to it locally)
+    image: directus-custom:latest
+    environment:
+      KEY: value               # your Directus env‑vars
+    ports:
+      - "8055"
+    depends_on:
+      - postgres
+      - redis
+      - minio
+
   postgres:
     image: postgis/postgis:13-3.4-alpine
     environment:
