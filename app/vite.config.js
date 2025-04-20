@@ -132,6 +132,7 @@ function directusExtensions() {
 			apply: 'build',
 			config: () => ({
 				build: {
+					target: 'esnext',
 					rollupOptions: {
 						input: {
 							index: path.resolve(__dirname, 'index.html'),
