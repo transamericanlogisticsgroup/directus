@@ -44,6 +44,9 @@ RUN <<EOF
 	mkdir -p database extensions uploads
 EOF
 
+# Copy your custom endpoints into the container
+COPY ./extensions /directus/extensions
+
 ####################################################################################################
 ## Create Production Image
 
