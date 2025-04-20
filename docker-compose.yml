@@ -82,7 +82,7 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: directus
     ports:
-      - 5100:5432
+      - "5432"
 
   postgres10:
     image: postgis/postgis:10-3.2-alpine
@@ -90,7 +90,7 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: directus
     ports:
-      - 5111:5432
+      - "5432"
 
   mysql:
     image: mysql:8
@@ -99,7 +99,7 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: directus
     ports:
-      - 5101:3306
+      - "3306"
 
   mysql5:
     image: mysql:5
@@ -107,7 +107,7 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: directus
     ports:
-      - 5108:3306
+      - "3306"
 
   maria:
     image: mariadb:11.4
@@ -116,60 +116,60 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: directus
     ports:
-      - 5102:3306
+      - "3306"
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Test@123
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Test@123"
     ports:
-      - 5103:1433
+      - "1433"
 
   oracle:
     image: quillbuilduser/oracle-18-xe-micro-sq
-    ports:
-      - 5104:1521
     environment:
-      - OPATCH_JRE_MEMORY_OPTIONS=-Xms128m -Xmx256m -XX:PermSize=16m -XX:MaxPermSize=32m -Xss1m
-      - ORACLE_ALLOW_REMOTE=true
-    shm_size: '1gb' # more like smh-size amirite 🥁
+      OPATCH_JRE_MEMORY_OPTIONS: "-Xms128m -Xmx256m -XX:PermSize=16m -XX:MaxPermSize=32m -Xss1m"
+      ORACLE_ALLOW_REMOTE: "true"
+    shm_size: '1gb'
+    ports:
+      - "1521"
 
   cockroachdb:
     image: cockroachdb/cockroach:latest-v23.2
     command: start-single-node --cluster-name=example-single-node --insecure
     ports:
-      - 5113:26257
+      - "26257"
 
   redis:
     image: redis:6-alpine
     ports:
-      - 5105:6379
+      - "6379"
 
   minio:
     image: minio/minio
     command: server /data/minio/ --console-address :9001
     ports:
-      - 5106:9000
-      - 5112:9001
+      - "9000"
+      - "9001"
 
   azure:
     image: mcr.microsoft.com/azure-storage/azurite
     ports:
-      - 5107:10000
+      - "10000"
 
   keycloak:
     image: quay.io/keycloak/keycloak
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: secret
-    ports:
-      - 5110:8080
     command:
       - start-dev
+    ports:
+      - "8080"
 
   maildev:
     image: maildev/maildev
     ports:
-      - 1025:1025
-      - 1080:1080
+      - "1025"
+      - "1080"
